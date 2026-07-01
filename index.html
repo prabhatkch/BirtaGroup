@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birta Group — Pioneering Collective Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1717;
+    --bg-deep: #050B0B;
+    --primary: #0B1717;
+    --text: #F6F8F7;
+    --muted: #9BA8A5;
+    --btn-bg: #F6F8F7;
+    --btn-text: #0B1717;
+    --line: rgba(246, 248, 247, 0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: radial-gradient(ellipse 120% 80% at 50% -10%, var(--bg) 0%, var(--bg-deep) 70%);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Navbar */
+  .navbar{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem clamp(1.5rem, 5vw, 4rem);
+    background: rgba(11, 23, 23, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo{
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text);
+  }
+
+  .navbar .cta{
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--btn-text);
+    background: var(--btn-bg);
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .navbar .cta:hover{
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .navbar .cta:focus-visible,
+  a:focus-visible,
+  button:focus-visible{
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+  }
+
+  /* Hero */
+  .hero{
+    min-height: calc(100vh - 78px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem clamp(1.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .hero-content{
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .kicker{
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .headline{
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .subline{
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+
+  .hero-cta{
+    margin-top: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--btn-text);
+    background: var(--btn-bg);
+    padding: 0.9rem 1.9rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.25s ease, opacity 0.25s ease, gap 0.25s ease;
+  }
+
+  .hero-cta:hover{
+    opacity: 0.85;
+    gap: 0.9rem;
+    transform: translateY(-2px);
+  }
+
+  .hero-cta svg{
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s ease;
+  }
+
+  @media (max-width: 520px){
+    .navbar{ padding: 1.3rem 1.25rem; }
+    .navbar .cta{ padding: 0.55rem 1.1rem; font-size: 0.8rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <span class="logo">Birta Group</span>
+  <a class="cta" href="mailto:hello@birtagroup.com">Get in touch</a>
+</nav>
+
+<main class="hero">
+  <div class="hero-content">
+    <span class="kicker">Birta Group</span>
+    <h1 class="headline">Pioneering Collective Growth</h1>
+    <p class="subline">We build the connections, capital, and conviction that let ventures grow further together than any one of them could alone.</p>
+    <a class="hero-cta" href="mailto:hello@birtagroup.com">
+      Start a conversation
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </div>
+</main>
+
+</body>
+</html>
