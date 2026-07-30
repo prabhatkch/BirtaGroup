@@ -6,179 +6,1219 @@
 <title>Birta Group — Pioneering Collective Growth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg: #0B1717;
-    --bg-deep: #050B0B;
-    --primary: #0B1717;
-    --text: #F6F8F7;
-    --muted: #9BA8A5;
-    --btn-bg: #F6F8F7;
-    --btn-text: #0B1717;
-    --line: rgba(246, 248, 247, 0.12);
+  :root {
+    --bg:        #F2F3F0;
+    --bg-alt:    #E8EAE6;
+    --bg-dark:   #0F1A14;
+    --text:      #0F1A14;
+    --text-sub:  #2E3D34;
+    --muted:     #697569;
+    --accent:    #0F1A14;
+    --gold:      #B8972A;
+    --line:      rgba(15,26,20,0.10);
+    --line-dark: rgba(242,243,240,0.10);
+    --btn-bg:    #0F1A14;
+    --btn-text:  #F2F3F0;
+    --dd-bg:     #FAFBF9;
   }
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
 
-  html{ scroll-behavior:smooth; }
-
-  body{
-    background: radial-gradient(ellipse 120% 80% at 50% -10%, var(--bg) 0%, var(--bg-deep) 70%);
+  body {
+    background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Navbar */
-  .navbar{
+  /* ── TYPE SCALE ────────────────────────── */
+  /* Display / headings → Montserrat          */
+  /* Body / UI          → Barlow              */
+
+  /* ── NAVBAR ──────────────────────────────── */
+  .navbar {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.6rem clamp(1.5rem, 5vw, 4rem);
-    background: rgba(11, 23, 23, 0.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    padding: 0 clamp(1.5rem, 5vw, 4.5rem);
+    height: 70px;
+    background: rgba(242,243,240,0.93);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--line);
   }
 
-  .logo{
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    color: var(--text);
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-decoration: none;
+    flex-shrink: 0;
   }
 
-  .navbar .cta{
-    font-family: 'Inter', sans-serif;
+  .nav-center { display: flex; align-items: center; }
+  .nav-item   { position: relative; }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 1.05rem;
+    height: 70px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-sub);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  .nav-link:hover { color: var(--accent); }
+
+  .nav-link .chevron {
+    width: 11px; height: 11px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.25s;
+  }
+
+  .nav-item.open > .nav-link .chevron { transform: rotate(180deg); }
+
+  /* Dropdown L1 */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0;
+    min-width: 230px;
+    background: var(--dd-bg);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+    z-index: 300;
+  }
+
+  .nav-item.open > .dropdown { display: block; }
+  .dd-item { position: relative; }
+
+  .dd-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 11px 18px;
+    font-family: 'Barlow', sans-serif;
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--btn-text);
-    background: var(--btn-bg);
-    padding: 0.65rem 1.4rem;
-    border-radius: 100px;
+    letter-spacing: 0.03em;
+    color: var(--text-sub);
     text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition: background 0.15s, color 0.15s;
     white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
   }
 
-  .navbar .cta:hover{
-    opacity: 0.85;
-    transform: translateY(-1px);
+  .dd-link:hover { background: var(--bg-alt); color: var(--accent); }
+
+  .dd-link .chevron-r {
+    width: 10px; height: 10px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0; opacity: 0.45;
   }
 
-  .navbar .cta:focus-visible,
-  a:focus-visible,
-  button:focus-visible{
-    outline: 2px solid var(--text);
-    outline-offset: 3px;
+  /* Dropdown L2 */
+  .subdropdown {
+    display: none;
+    position: absolute;
+    top: -1px; left: 100%;
+    min-width: 230px;
+    background: var(--dd-bg);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--gold);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+    z-index: 400;
   }
 
-  /* Hero */
-  .hero{
-    min-height: calc(100vh - 78px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem clamp(1.5rem, 5vw, 4rem);
-    text-align: center;
-  }
+  .dd-item:hover > .subdropdown,
+  .dd-item.open  > .subdropdown { display: block; }
 
-  .hero-content{
-    max-width: 780px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.75rem;
-  }
-
-  .kicker{
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+  .dd-section-label {
+    padding: 10px 18px 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  .headline{
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    font-size: clamp(2.6rem, 6.5vw, 5.2rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--text);
-  }
+  .dd-divider { height: 1px; background: var(--line); margin: 5px 0; }
+  .subdropdown .dd-link { font-weight: 400; font-size: 0.83rem; }
 
-  .subline{
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 46ch;
-  }
-
-  .hero-cta{
-    margin-top: 0.75rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
+  /* Nav CTA */
+  .nav-right .cta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
     color: var(--btn-text);
     background: var(--btn-bg);
-    padding: 0.9rem 1.9rem;
-    border-radius: 100px;
+    padding: 0.62rem 1.4rem;
     text-decoration: none;
-    transition: transform 0.25s ease, opacity 0.25s ease, gap 0.25s ease;
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
   }
 
-  .hero-cta:hover{
-    opacity: 0.85;
-    gap: 0.9rem;
-    transform: translateY(-2px);
+  .nav-right .cta:hover { opacity: 0.80; transform: translateY(-1px); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
   }
 
-  .hero-cta svg{
-    width: 16px;
-    height: 16px;
-    transition: transform 0.25s ease;
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--accent);
   }
 
-  @media (max-width: 520px){
-    .navbar{ padding: 1.3rem 1.25rem; }
-    .navbar .cta{ padding: 0.55rem 1.1rem; font-size: 0.8rem; }
+  /* ── HERO ───────────────────────────────── */
+  .hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    padding: 5rem clamp(1.5rem, 5vw, 4.5rem);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
   }
 
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .kicker::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .headline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 6.5vw, 6rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.8rem;
+  }
+
+  .subline {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.78;
+    color: var(--muted);
+    max-width: 50ch;
+    font-weight: 300;
+    margin-bottom: 2.8rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--btn-text);
+    background: var(--btn-bg);
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.80; transform: translateY(-2px); }
+  .btn-primary svg { width:13px; height:13px; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(15,26,20,0.22);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .hero-bg-text {
+    position: absolute;
+    right: -1rem;
+    bottom: -2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(8rem, 18vw, 22rem);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(15,26,20,0.05);
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── SECTION LABEL ─────────────────────── */
+  .sec-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sec-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+
+  /* ── ABOUT ──────────────────────────────── */
+  #about {
+    padding: 7rem clamp(1.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.8rem;
+  }
+
+  .about-body {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 1.1rem;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    margin-top: 2.8rem;
+  }
+
+  .stat {
+    padding: 1.5rem 1.2rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .about-right { position: relative; }
+
+  .about-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-img-caption {
+    position: absolute;
+    bottom: 0; left: 0;
+    background: var(--bg-dark);
+    color: rgba(242,243,240,0.65);
+    padding: 0.85rem 1.3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .about-cta { margin-top: 2.2rem; }
+
+  /* ── BUSINESSES ──────────────────────────── */
+  #businesses {
+    padding: 7rem clamp(1.5rem, 5vw, 4.5rem);
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .biz-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+  }
+
+  .biz-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    max-width: 420px;
+  }
+
+  .biz-intro {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.78;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 40ch;
+  }
+
+  /* Image cards — category only */
+  .biz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .biz-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    display: block;
+    text-decoration: none;
+    background: var(--bg-dark);
+    cursor: pointer;
+  }
+
+  .biz-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.55s ease;
+    filter: brightness(0.78) grayscale(12%);
+  }
+
+  .biz-card:hover .biz-card-img {
+    transform: scale(1.05);
+    filter: brightness(0.60) grayscale(0%);
+  }
+
+  /* Dark gradient overlay */
+  .biz-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10,18,12,0.88) 0%,
+      rgba(10,18,12,0.30) 50%,
+      rgba(10,18,12,0.06) 100%
+    );
+    transition: background 0.4s;
+  }
+
+  .biz-card:hover .biz-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(10,18,12,0.92) 0%,
+      rgba(10,18,12,0.45) 55%,
+      rgba(10,18,12,0.10) 100%
+    );
+  }
+
+  /* Category label + arrow */
+  .biz-card-body {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2rem 1.8rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .biz-card-category {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .biz-card-tag {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.60rem;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .biz-card-arrow {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .biz-card:hover .biz-card-arrow {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .biz-card-arrow svg { width:14px; height:14px; }
+
+  .biz-footer {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ── CAREERS ─────────────────────────────── */
+  #careers {
+    padding: 7rem clamp(1.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .careers-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.6rem;
+  }
+
+  .careers-body {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 2.4rem;
+  }
+
+  .careers-right {
+    background: var(--bg-dark);
+    padding: 3rem;
+    color: var(--btn-text);
+  }
+
+  .careers-card-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.60rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(242,243,240,0.38);
+    margin-bottom: 1.8rem;
+  }
+
+  .careers-card-headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--btn-text);
+    line-height: 1.2;
+    margin-bottom: 1.3rem;
+  }
+
+  .careers-card-body {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.78;
+    color: rgba(242,243,240,0.55);
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .btn-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bg-dark);
+    background: var(--bg);
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-light:hover { opacity: 0.85; transform: translateY(-2px); }
+  .btn-light svg { width:13px; height:13px; }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer { background: var(--bg-dark); color: rgba(242,243,240,0.75); }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 5rem clamp(1.5rem, 5vw, 4.5rem) 4rem;
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.20em;
+    color: var(--btn-text);
+    display: block;
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
+
+  .footer-tagline {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.72;
+    color: rgba(242,243,240,0.40);
+    font-weight: 300;
+    max-width: 28ch;
+    margin-bottom: 1.8rem;
+  }
+
+  .footer-socials { display: flex; gap: 10px; }
+
+  .social-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(242,243,240,0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(242,243,240,0.50);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .social-icon:hover { border-color: rgba(242,243,240,0.55); color: var(--btn-text); }
+  .social-icon svg { width:14px; height:14px; fill:currentColor; }
+
+  .footer-col-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(242,243,240,0.35);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.65rem; }
+
+  .footer-links a {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(242,243,240,0.58);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--btn-text); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem clamp(1.5rem, 5vw, 4.5rem);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-copy {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(242,243,240,0.28);
+    letter-spacing: 0.03em;
+  }
+
+  .footer-legal { display: flex; gap: 1.4rem; }
+
+  .footer-legal a {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(242,243,240,0.28);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-legal a:hover { color: rgba(242,243,240,0.60); }
+
+  /* ── FOCUS ────────────────────────────────── */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ── REVEAL ──────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.60s ease, transform 0.60s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 960px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-right { max-width: 500px; }
+    .biz-grid { grid-template-columns: 1fr 1fr; }
+    #careers { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+
+  @media (max-width: 700px) {
+    .nav-center, .nav-right { display: none; }
+    .hamburger { display: flex; }
+    .biz-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .biz-header { flex-direction: column; align-items: flex-start; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 420px) {
+    .biz-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { transition: none; opacity: 1; transform: none; }
+    .biz-card-img { transition: none; }
+    * { transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
+<!-- ── NAVBAR ──────────────────────────────── -->
 <nav class="navbar">
-  <span class="logo">Birta Group</span>
-  <a class="cta" href="mailto:hello@birtagroup.com">Get in touch</a>
+  <a class="logo" href="#">BIRTA</a>
+
+  <div class="nav-center" id="navCenter">
+
+    <div class="nav-item">
+      <a class="nav-link" href="#about">About</a>
+    </div>
+
+    <div class="nav-item" id="bizMenu">
+      <button class="nav-link" aria-haspopup="true" aria-expanded="false" onclick="toggleNav('bizMenu',event)">
+        Businesses
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="dropdown" role="menu">
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Real Estate<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Properties</a>
+            <a class="dd-link" href="#">Pinnacle Developments</a>
+            <a class="dd-link" href="#">Urban Horizon Realty</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">Landmark Spaces</a>
+            <a class="dd-link" href="#">Heritage Estates</a>
+          </div>
+        </div>
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Hospitality<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Stays</a>
+            <a class="dd-link" href="#">Altura Retreats</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">Summit Lodge Co.</a>
+            <a class="dd-link" href="#">Valley House Hotels</a>
+          </div>
+        </div>
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Technology<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Tech</a>
+            <a class="dd-link" href="#">NovaBit Solutions</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">DataBridge Systems</a>
+            <a class="dd-link" href="#">CloudNest Platforms</a>
+          </div>
+        </div>
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Trading &amp; Commerce<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Trade</a>
+            <a class="dd-link" href="#">Meridian Imports</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">CrossRoute Commerce</a>
+            <a class="dd-link" href="#">Frontier Markets</a>
+          </div>
+        </div>
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Education<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Institute</a>
+            <a class="dd-link" href="#">Aspire Academy</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">LearnPath Skills</a>
+            <a class="dd-link" href="#">Catalyst Learning Hub</a>
+          </div>
+        </div>
+
+        <div class="dd-item">
+          <button class="dd-link" onclick="toggleSub(this,event)">Finance<svg class="chevron-r" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="subdropdown">
+            <div class="dd-section-label">Brands</div>
+            <a class="dd-link" href="#">Birta Capital</a>
+            <a class="dd-link" href="#">Verdant Ventures</a>
+            <div class="dd-divider"></div>
+            <div class="dd-section-label">Ventures</div>
+            <a class="dd-link" href="#">Keystone Fund</a>
+            <a class="dd-link" href="#">Altas Investment Partners</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a class="nav-link" href="#careers">Careers</a>
+    </div>
+
+  </div>
+
+  <div class="nav-right">
+    <a class="cta" href="#contact">Get in touch</a>
+  </div>
+
+  <button class="hamburger" aria-label="Open menu" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<main class="hero">
+<!-- ── HERO ─────────────────────────────────── -->
+<section class="hero">
   <div class="hero-content">
-    <span class="kicker">Birta Group</span>
-    <h1 class="headline">Pioneering Collective Growth</h1>
-    <p class="subline">We build the connections, capital, and conviction that let ventures grow further together than any one of them could alone.</p>
-    <a class="hero-cta" href="mailto:hello@birtagroup.com">
-      Start a conversation
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    <p class="kicker reveal">Group of Companies</p>
+    <h1 class="headline reveal">Pioneering<br>Collective<br>Growth</h1>
+    <p class="subline reveal">We build the connections, capital, and conviction that let ventures grow further together than any one of them could alone.</p>
+    <div class="hero-actions reveal">
+      <a class="btn-primary" href="#businesses">
+        Our Businesses
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn-outline" href="#about">About the Group</a>
+    </div>
+  </div>
+  <div class="hero-bg-text" aria-hidden="true">BIRTA</div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <p class="sec-label reveal">About the Group</p>
+      <h2 class="about-headline reveal">One Group.<br>Many Horizons.</h2>
+      <p class="about-body reveal">Founded on the belief that sustainable growth is always collective, BIRTA is a multi-sector holding group building enduring enterprises across industries — united by shared vision, disciplined capital, and long-term thinking.</p>
+      <p class="about-body reveal">Headquartered in Nepal and expanding across the region, we operate a diverse portfolio of companies, each leading in its sector while sharing the values and ambition that define the BIRTA identity.</p>
+      <div class="about-stats reveal">
+        <div class="stat">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Active Ventures</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Industries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years of Growth</div>
+        </div>
+      </div>
+      <div class="about-cta reveal">
+        <a class="btn-primary" href="#about">
+          Learn More About Us
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="about-right reveal">
+      <img
+        class="about-img"
+        src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop"
+        alt="Aerial view of a modern city representing BIRTA's scale and ambition"
+        loading="lazy"
+      >
+      <div class="about-img-caption">Kathmandu &mdash; Headquarters</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BUSINESSES ────────────────────────────── -->
+<section id="businesses">
+  <div class="biz-header">
+    <div>
+      <p class="sec-label reveal">Our Businesses</p>
+      <h2 class="biz-headline reveal">A Portfolio Built<br>to Last</h2>
+    </div>
+    <p class="biz-intro reveal">Six sectors. Dozens of companies. One shared purpose — building institutions that generate value for generations.</p>
+  </div>
+
+  <div class="biz-grid">
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=700&q=80&auto=format&fit=crop" alt="Real Estate" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Real Estate</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=700&q=80&auto=format&fit=crop" alt="Hospitality" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Hospitality</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&q=80&auto=format&fit=crop" alt="Technology" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Technology</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=700&q=80&auto=format&fit=crop" alt="Trading and Commerce" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Trading &amp; Commerce</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=700&q=80&auto=format&fit=crop" alt="Education" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Education</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="biz-card reveal" href="#">
+      <img class="biz-card-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&auto=format&fit=crop" alt="Finance" loading="lazy">
+      <div class="biz-card-overlay"></div>
+      <div class="biz-card-body">
+        <div>
+          <span class="biz-card-tag">Explore Sector</span>
+          <div class="biz-card-category">Finance</div>
+        </div>
+        <div class="biz-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="biz-footer">
+    <a class="btn-primary" href="#businesses">
+      View All Businesses
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
-</main>
+</section>
 
+<!-- ── CAREERS ───────────────────────────────── -->
+<section id="careers">
+  <div class="careers-left">
+    <p class="sec-label reveal">Careers</p>
+    <h2 class="careers-headline reveal">Grow With<br>the Group</h2>
+    <p class="careers-body reveal">BIRTA GROUP is built by people who think in decades, not quarters. We invest in talent the same way we invest in business — with patience, conviction, and a long horizon. Join us and build something that lasts.</p>
+    <a class="btn-primary reveal" href="#careers">
+      View Open Roles
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+  <div class="careers-right reveal">
+    <p class="careers-card-label">Life at BIRTA GROUP</p>
+    <h3 class="careers-card-headline">We don't hire for roles.<br>We hire for the future.</h3>
+    <p class="careers-card-body">Our people span six industries, dozens of companies, and one common thread: a commitment to building things that matter. Explore opportunities across the group and find where you fit.</p>
+    <a class="btn-light" href="#careers">
+      Explore Opportunities
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="footer-logo" href="#">BIRTA</a>
+      <p class="footer-tagline">Pioneering collective growth across industries, borders, and generations.</p>
+      <div class="footer-socials">
+        <a class="social-icon" href="https://linkedin.com/company/birtagroup" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM3.56 20.45h3.56V9H3.56v11.45z"/></svg>
+        </a>
+        <a class="social-icon" href="https://facebook.com/birtagroup" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.03 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.53-4.7 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.95.93-1.95 1.88v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.09 24 18.1 24 12.07z"/></svg>
+        </a>
+        <a class="social-icon" href="https://instagram.com/birtagroup" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.86 3.9 2.31 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24c3.26 0 3.67-.01 4.95-.07 4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95C23.73 2.7 21.3.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32A6.16 6.16 0 0012 5.84zm0 10.16a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="#about">About BIRTA</a></li>
+        <li><a href="#businesses">Our Businesses</a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#">Leadership</a></li>
+        <li><a href="#">Newsroom</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Businesses</p>
+      <ul class="footer-links">
+        <li><a href="#">Real Estate</a></li>
+        <li><a href="#">Hospitality</a></li>
+        <li><a href="#">Technology</a></li>
+        <li><a href="#">Trading</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Finance</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="#">Kathmandu, Nepal</a></li>
+        <li><a href="#">General Enquiries</a></li>
+        <li><a href="#">Partnership &amp; Investment</a></li>
+        <li><a href="#">Press &amp; Media</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; 2026 BIRTA Group. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleNav(id, e) {
+    e && e.stopPropagation();
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(i => {
+      i.classList.remove('open');
+      const b = i.querySelector('[aria-expanded]');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      const b = item.querySelector('[aria-expanded]');
+      if (b) b.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function toggleSub(btn, e) {
+    e && e.stopPropagation();
+    const item = btn.closest('.dd-item');
+    const isOpen = item.classList.contains('open');
+    btn.closest('.dropdown').querySelectorAll('.dd-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(i => {
+      i.classList.remove('open');
+      const b = i.querySelector('[aria-expanded]');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  function toggleMobile() {
+    const c = document.getElementById('navCenter');
+    const open = c.style.display === 'flex';
+    if (open) {
+      c.removeAttribute('style');
+    } else {
+      c.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);padding:1rem 0;z-index:199;';
+    }
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 5) * 0.07}s`;
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
