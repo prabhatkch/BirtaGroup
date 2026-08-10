@@ -196,13 +196,17 @@
     position:relative;
     transition:background .45s ease, color .45s ease;
   }
-  .card:hover{
+  .card:hover,
+  .card.touch-active{
     background:var(--black);
     color:var(--white);
   }
-  .card-grid a.card:nth-child(1):hover{ background:#00252A; }
-  .card-grid a.card:nth-child(2):hover{ background:#000030; }
-  .card-grid a.card:nth-child(3):hover{ background:#86041e; }
+  .card-grid a.card:nth-child(1):hover,
+  .card-grid a.card:nth-child(1).touch-active{ background:#00252A; }
+  .card-grid a.card:nth-child(2):hover,
+  .card-grid a.card:nth-child(2).touch-active{ background:#000030; }
+  .card-grid a.card:nth-child(3):hover,
+  .card-grid a.card:nth-child(3).touch-active{ background:#86041e; }
   .card-index{
     font-family:'IBM Plex Mono',monospace;
     font-size:12px;
@@ -210,7 +214,8 @@
     color:var(--gray-2);
     transition:color .45s ease;
   }
-  .card:hover .card-index{ color:var(--gray-4); }
+  .card:hover .card-index,
+  .card.touch-active .card-index{ color:var(--gray-4); }
 
   .card-name{
     font-family:'Fraunces',serif;
@@ -228,7 +233,8 @@
     margin-top:14px;
     transition:color .45s ease;
   }
-  .card:hover .card-tagline{ color:var(--gray-4); }
+  .card:hover .card-tagline,
+  .card.touch-active .card-tagline{ color:var(--gray-4); }
 
   .card-desc{
     font-size:14.5px;
@@ -237,7 +243,8 @@
     margin-top:22px;
     transition:color .45s ease;
   }
-  .card:hover .card-desc{ color:#c9c9c9; }
+  .card:hover .card-desc,
+  .card.touch-active .card-desc{ color:#c9c9c9; }
 
   .card-foot{
     margin-top:auto;
@@ -254,7 +261,8 @@
     display:inline-block;
     transition:transform .4s ease;
   }
-  .card:hover .card-arrow{ transform:translateX(6px); }
+  .card:hover .card-arrow,
+  .card.touch-active .card-arrow{ transform:translateX(6px); }
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -305,6 +313,35 @@
     color:var(--white);
     margin-bottom:10px;
     opacity:0.88;
+  }
+  .footer-social{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-top:22px;
+  }
+  .footer-social a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;
+    height:36px;
+    border:1px solid var(--gray-1);
+    border-radius:50%;
+    color:var(--white);
+    opacity:0.88;
+    transition:background .3s ease, border-color .3s ease, opacity .3s ease;
+  }
+  .footer-social a:hover{
+    background:var(--white);
+    color:var(--black);
+    border-color:var(--white);
+    opacity:1;
+  }
+  .footer-social svg{
+    width:16px;
+    height:16px;
+    fill:currentColor;
   }
   .footer-bottom{
     max-width:1160px;
@@ -399,6 +436,26 @@
     <div class="footer-brand">
       <div class="logo">BIRTA</div>
       <p>Pioneering collective growth.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/birtagroup" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.12 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38A5.87 5.87 0 0 0 .63 4.14C.33 4.9.12 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.05 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.66.66 1.34 1.07 2.13 1.38.76.3 1.64.51 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.05 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.66 1.07-1.34 1.38-2.13.3-.76.51-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.05-1.27-.26-2.15-.56-2.91a5.87 5.87 0 0 0-1.38-2.13A5.87 5.87 0 0 0 19.86.63c-.76-.3-1.64-.51-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84Zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.41-10.4a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44Z"/></svg>
+        </a>
+        <a href="https://x.com/birtagroup" target="_blank" rel="noopener" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/birtagroup" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57Z"/></svg>
+        </a>
+        <a href="https://facebook.com/birtagroup" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34v7.03C18.34 21.21 22 17.06 22 12.06Z"/></svg>
+        </a>
+        <a href="https://tiktok.com/@birtagroup" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M16.6 5.82c-.87-.96-1.35-2.15-1.35-3.42h-3.13v13.6c0 1.55-1.26 2.83-2.83 2.83a2.83 2.83 0 0 1 0-5.66c.28 0 .55.04.8.12V9.9a6.02 6.02 0 0 0-.8-.05 5.96 5.96 0 1 0 5.96 5.96V9.53a8.36 8.36 0 0 0 4.88 1.56V8.02a5.4 5.4 0 0 1-3.53-2.2Z"/></svg>
+        </a>
+        <a href="https://youtube.com/@birtagroup" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.5 6.9a3.02 3.02 0 0 0-2.12-2.14C19.5 4.3 12 4.3 12 4.3s-7.5 0-9.38.46A3.02 3.02 0 0 0 .5 6.9 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.1 3.02 3.02 0 0 0 2.12 2.14C4.5 19.7 12 19.7 12 19.7s7.5 0 9.38-.46a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.1ZM9.6 15.4V8.6L15.8 12Z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer-links">
       <div class="footer-col">
@@ -420,6 +477,20 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive:true });
+
+  // ---------- Touch hover for business cards ----------
+  const businessCards = document.querySelectorAll('.card-grid .card');
+  businessCards.forEach(card => {
+    card.addEventListener('touchstart', () => {
+      businessCards.forEach(c => { if (c !== card) c.classList.remove('touch-active'); });
+      card.classList.add('touch-active');
+    }, { passive:true });
+  });
+  document.addEventListener('touchstart', (e) => {
+    if (!e.target.closest('.card-grid .card')) {
+      businessCards.forEach(c => c.classList.remove('touch-active'));
+    }
   }, { passive:true });
 
   // ---------- Interactive line-map ----------
