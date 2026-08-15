@@ -74,7 +74,6 @@
     inset:0;
     width:100%;
     height:100%;
-    cursor:crosshair;
     -webkit-mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 96%);
     mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 96%);
   }
@@ -497,13 +496,12 @@
     }
   }, { passive:true });
 
-  // ---------- Interactive grid background ----------
+  // ---------- Static grid background ----------
   const canvas = document.getElementById('mapCanvas');
   const ctx = canvas.getContext('2d');
   const hero = document.getElementById('hero');
   let W, H;
   let gridSegs = [];
-  let mouse = { x: -9999, y: -9999 };
 
   const GRID_SPACING = 46; // px, in CSS pixels before devicePixelRatio scaling
 
@@ -511,10 +509,10 @@
     gridSegs = [];
     const spacing = GRID_SPACING * devicePixelRatio;
     for(let x = 0; x <= W; x += spacing){
-      gridSegs.push({ x1:x, y1:0, x2:x, y2:H, midx:x, midy:H/2 });
+      gridSegs.push({ x1:x, y1:0, x2:x, y2:H });
     }
     for(let y = 0; y <= H; y += spacing){
-      gridSegs.push({ x1:0, y1:y, x2:W, y2:y, midx:W/2, midy:y });
+      gridSegs.push({ x1:0, y1:y, x2:W, y2:y });
     }
   }
 
@@ -524,71 +522,26 @@
     canvas.style.width = hero.clientWidth + 'px';
     canvas.style.height = hero.clientHeight + 'px';
     buildGrid();
-  }
-
-  function dist(ax,ay,bx,by){
-    const dx = ax-bx, dy = ay-by;
-    return Math.sqrt(dx*dx + dy*dy);
+    draw();
   }
 
   function draw(){
     ctx.clearRect(0,0,W,H);
-    const influenceRadius = 220 * devicePixelRatio;
-    const mx = mouse.x * devicePixelRatio;
-    const my = mouse.y * devicePixelRatio;
-
+    ctx.lineWidth = 1 * devicePixelRatio;
+    ctx.strokeStyle = 'rgba(10,10,10,0.07)';
     for(const s of gridSegs){
-      // find the closest point on the line segment to the cursor for accurate proximity
-      let px, py;
-      if(s.x1 === s.x2){
-        px = s.x1;
-        py = Math.min(Math.max(my, Math.min(s.y1,s.y2)), Math.max(s.y1,s.y2));
-      } else {
-        py = s.y1;
-        px = Math.min(Math.max(mx, Math.min(s.x1,s.x2)), Math.max(s.x1,s.x2));
-      }
-      const d = dist(px, py, mx, my);
-
-      let alpha = 0.05;
-      let width = 1 * devicePixelRatio;
-      if(d < influenceRadius){
-        const t = 1 - d/influenceRadius;
-        alpha = 0.05 + t * 0.2;
-        width = (1 + t * 1.2) * devicePixelRatio;
-      }
-      ctx.lineWidth = width;
-      ctx.strokeStyle = `rgba(10,10,10,${alpha})`;
       ctx.beginPath();
       ctx.moveTo(s.x1, s.y1);
       ctx.lineTo(s.x2, s.y2);
       ctx.stroke();
     }
-
-    requestAnimationFrame(draw);
   }
-
-  hero.addEventListener('mousemove', (e) => {
-    const rect = hero.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-  hero.addEventListener('mouseleave', () => {
-    mouse.x = -9999; mouse.y = -9999;
-  });
-  hero.addEventListener('touchmove', (e) => {
-    if(e.touches[0]){
-      const rect = hero.getBoundingClientRect();
-      mouse.x = e.touches[0].clientX - rect.left;
-      mouse.y = e.touches[0].clientY - rect.top;
-    }
-  }, {passive:true});
 
   window.addEventListener('resize', () => {
     resize();
   });
 
   resize();
-  requestAnimationFrame(draw);
 </script>
 
 </body>
