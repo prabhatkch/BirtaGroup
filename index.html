@@ -69,14 +69,6 @@
     justify-content:center;
     overflow:hidden;
   }
-  .hero canvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    -webkit-mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 96%);
-    mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 96%);
-  }
   .hero-content{
     position:relative;
     z-index:2;
@@ -390,7 +382,6 @@
 </nav>
 
 <section class="hero" id="hero">
-  <canvas id="mapCanvas"></canvas>
   <div class="hero-content">
     <div class="hero-eyebrow">Birta Group</div>
     <h1>Pioneering Collective<br><em>Growth</em></h1>
@@ -495,53 +486,6 @@
       businessCards.forEach(c => c.classList.remove('touch-active'));
     }
   }, { passive:true });
-
-  // ---------- Static grid background ----------
-  const canvas = document.getElementById('mapCanvas');
-  const ctx = canvas.getContext('2d');
-  const hero = document.getElementById('hero');
-  let W, H;
-  let gridSegs = [];
-
-  const GRID_SPACING = 46; // px, in CSS pixels before devicePixelRatio scaling
-
-  function buildGrid(){
-    gridSegs = [];
-    const spacing = GRID_SPACING * devicePixelRatio;
-    for(let x = 0; x <= W; x += spacing){
-      gridSegs.push({ x1:x, y1:0, x2:x, y2:H });
-    }
-    for(let y = 0; y <= H; y += spacing){
-      gridSegs.push({ x1:0, y1:y, x2:W, y2:y });
-    }
-  }
-
-  function resize(){
-    W = canvas.width = hero.clientWidth * devicePixelRatio;
-    H = canvas.height = hero.clientHeight * devicePixelRatio;
-    canvas.style.width = hero.clientWidth + 'px';
-    canvas.style.height = hero.clientHeight + 'px';
-    buildGrid();
-    draw();
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    ctx.lineWidth = 1 * devicePixelRatio;
-    ctx.strokeStyle = 'rgba(10,10,10,0.07)';
-    for(const s of gridSegs){
-      ctx.beginPath();
-      ctx.moveTo(s.x1, s.y1);
-      ctx.lineTo(s.x2, s.y2);
-      ctx.stroke();
-    }
-  }
-
-  window.addEventListener('resize', () => {
-    resize();
-  });
-
-  resize();
 </script>
 
 </body>
